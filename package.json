@@ -1,0 +1,48 @@
+{
+  "name": "duct-tape",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "tdeschryver",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeschryver/duct-tape.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tdeschryver/duct-tape/issues"
+  },
+  "main": "src/index.js",
+  "bin": "bin/duct-tape",
+  "scripts": {
+    "test": "tape test/*.js",
+    "precommit": "lint-staged && npm test"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "globby": "^6.1.0",
+    "minimist": "^1.2.0",
+    "tape": "^4.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.1",
+    "tap-json": "^1.0.0"
+  }
+}
