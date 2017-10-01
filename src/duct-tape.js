@@ -1,4 +1,5 @@
 'use strict';
+require('babel-polyfill');
 require('babel-register')({
   presets: [
     [
@@ -9,7 +10,6 @@ require('babel-register')({
       },
     ],
   ],
-  plugins: [['transform-object-rest-spread', { useBuiltIns: true }]],
 });
 
 const globby = require('globby');
