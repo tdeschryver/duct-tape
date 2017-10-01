@@ -41,7 +41,7 @@ test('it has tap output', assert => {
   spawnDuctTape(output => {
     assert.equal(output.error, null, "shouldn't throw errors when using the cli");
     assert.equal(output.stderr, '', 'stderr should be empty');
-    assert.equal(output.stdout, `TAP version 13
+    assert.equal(output.stdout.trim(), `TAP version 13
 # bar
 ok 1 should be falsy
 # foo
@@ -51,9 +51,7 @@ ok 2 should be truthy
 # tests 2
 # pass  2
 
-# ok
-
-`, 'should have output');
+# ok`, 'should have output');
     assert.end();
   }, './test/fixtures/output/*.js');
 });
@@ -68,8 +66,8 @@ test('it has formatted tap output', assert => {
       );
       assert.equal(output.stderr, '', 'stderr should be empty');
       assert.equal(
-        output.stdout,
-        '{"stats":{"asserts":2,"passes":2,"failures":0},"asserts":[{"number":1,"comment":"bar","name":"should be falsy","ok":true,"extra":{}},{"number":2,"comment":"foo","name":"should be truthy","ok":true,"extra":{}}]}\r\n',
+        output.stdout.trim(),
+        '{"stats":{"asserts":2,"passes":2,"failures":0},"asserts":[{"number":1,"comment":"bar","name":"should be falsy","ok":true,"extra":{}},{"number":2,"comment":"foo","name":"should be truthy","ok":true,"extra":{}}]}',
         'should output the tap results using a reporter'
       );
       assert.end();
