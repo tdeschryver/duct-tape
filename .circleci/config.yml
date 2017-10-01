@@ -1,9 +1,43 @@
 version: 2
 jobs:
-  build:
+  test-node4:
     docker:
       - image: circleci/node:4
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: npm test
+  test-node6:
+    docker:
       - image: circleci/node:6
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: npm test
+  test-node8:
+    docker:
       - image: circleci/node:8.0
     working_directory: ~/repo
     steps:
@@ -20,3 +54,10 @@ jobs:
       - run:
           name: test
           command: npm test
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test-node4
+      - test-node6
+      - test-node8
