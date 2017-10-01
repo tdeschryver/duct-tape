@@ -55,8 +55,9 @@ test('the cli can use a tap-formatter', assert => {
 
 function spawnDuctTape(cb, opts) {
   const args = ['test/fixtures/*.js'].concat(opts).join(' ');
+  const prefix = process.platform === 'win32' ? 'node' : '';
   const pid = exec(
-    `node ./bin/duct-tape ${args}`,
+    `${prefix} ./bin/duct-tape ${args}`,
     {
       cwd: cwd,
     },

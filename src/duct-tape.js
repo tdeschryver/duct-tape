@@ -5,11 +5,11 @@ require('babel-register')({
       'env',
       {
         targets: { node: 'current' },
-        useBuiltIns: true
-      }
-    ]
+        useBuiltIns: true,
+      },
+    ],
   ],
-  plugins: [['transform-object-rest-spread', { useBuiltIns: true }]]
+  plugins: [['transform-object-rest-spread', { useBuiltIns: true }]],
 });
 
 const globby = require('globby');
@@ -20,8 +20,8 @@ const ductTape = (
       `${process.cwd()}/test/**/*.js`,
       `!${process.cwd()}/test/fixtures/**/*.js`,
       `${process.cwd()}/tests/**/*.js`,
-      `!${process.cwd()}/tests/fixtures/**/*.js`
-    ]
+      `!${process.cwd()}/tests/fixtures/**/*.js`,
+    ],
   } = {}
 ) => {
   globby(patterns).then(paths => {
