@@ -1,6 +1,6 @@
 'use strict';
 const test = require('tape');
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 
 const cwd = process.cwd();
 
@@ -53,34 +53,21 @@ test('the cli can use a tap-formatter', assert => {
   );
 });
 
-function spawnDuctTape(cb, args) {
-  const pid = spawn(
-    'node ./bin/duct-tape',
-    ['test/fixtures/*.js'].concat(args),
+function spawnDuctTape(cb, opts) {
+  const args = ['test/fixtures/*.js'].concat(opts).join(' ');
+  const pid = exec(
+    `node ./bin/duct-tape ${args}`,
     {
       cwd: cwd,
-      stdio: 'pipe',
-      shell: true
+    },
+    (error, stdout, stderr) => {
+      cb({
+        error,
+        stdout,
+        stderr,
+      });
     }
   );
-  let output = { stdout: '', stderr: '', error: null, code: undefined };
-
-  pid.stdout.on('data', data => {
-    output.stdout += data;
-  });
-
-  pid.stderr.on('data', data => {
-    output.stderr += data;
-  });
-
-  pid.on('error', err => {
-    output.error = err;
-  });
-
-  pid.on('close', code => {
-    output.code = code;
-    cb(output);
-  });
 
   return pid;
 }
