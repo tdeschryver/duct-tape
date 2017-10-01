@@ -1,6 +1,9 @@
 'use strict';
 const test = require('tape');
+const path = require('path');
 const exec = require('child_process').exec;
+
+const ductTapeBin = path.join(__dirname, '../bin/duct-tape.js');
 
 test('it can use tape', assert => {
   spawnDuctTape(
@@ -92,18 +95,14 @@ test('it transpiles', assert => {
 });
 
 function spawnDuctTape(cb, args) {
-  const argsString = [].concat(args).join(' ');
-  const prefix = process.platform === 'win32' ? 'node ' : '';
-  const pid = exec(
-    `${prefix}./bin/duct-tape ${argsString}`,
-    (error, stdout, stderr) => {
-      cb({
-        error,
-        stdout,
-        stderr,
-      });
-    }
-  );
+  const cmd = [].concat(args).join(' ');
+  const pid = exec(`node "${ductTapeBin}" ${cmd}`, (error, stdout, stderr) => {
+    cb({
+      error,
+      stdout,
+      stderr,
+    });
+  });
 
   return pid;
 }
