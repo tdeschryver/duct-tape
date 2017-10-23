@@ -1,5 +1,5 @@
 'use strict';
-const test = require('tape');
+import test from 'tape';
 
 test('setting defaults for function parameters', assert => {
   assert.doesNotThrow(() => {

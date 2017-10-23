@@ -6,35 +6,21 @@ const exec = require('child_process').exec;
 const ductTapeBin = path.join(__dirname, '../bin/duct-tape.js');
 
 test('it can use tape', assert => {
-  spawnDuctTape(
-    output => {
-      assert.equal(
-        output.error,
-        null,
-        "shouldn't throw errors when using tape"
-      );
-      assert.equal(output.stderr, '', 'stderr should be empty');
-      assert.notEqual(output.stdout, '');
-      assert.end();
-    },
-    ['./test/fixtures/tape.js']
-  );
+  spawnDuctTape(output => {
+    assert.equal(output.error, null, "shouldn't throw errors when using tape");
+    assert.equal(output.stderr, '', 'stderr should be empty');
+    assert.notEqual(output.stdout, '');
+    assert.end();
+  }, './test/fixtures/tape.js');
 });
 
 test('it can use duct-tape', assert => {
-  spawnDuctTape(
-    output => {
-      assert.equal(
-        output.error,
-        null,
-        "shouldn't throw errors when using duct-tape"
-      );
-      assert.equal(output.stderr, '', 'stderr should be empty');
-      assert.notEqual(output.stdout, '');
-      assert.end();
-    },
-    ['./test/fixtures/duct-tape.js']
-  );
+  spawnDuctTape(output => {
+    assert.equal(output.error, null, "shouldn't throw errors when using duct-tape");
+    assert.equal(output.stderr, '', 'stderr should be empty');
+    assert.notEqual(output.stdout, '');
+    assert.end();
+  }, './test/fixtures/duct-tape.js');
 });
 
 test('it has tap output', assert => {
@@ -77,19 +63,12 @@ test('it has formatted tap output', assert => {
 });
 
 test('it transpiles', assert => {
-  spawnDuctTape(
-    output => {
-      assert.equal(
-        output.error,
-        null,
-        "shouldn't throw errors when transpiling"
-      );
-      assert.equal(output.stderr, '', 'stderr should be empty');
-      assert.notEqual(output.stdout, '');
-      assert.end();
-    },
-    ['./test/fixtures/transpile/*.js']
-  );
+  spawnDuctTape(output => {
+    assert.equal(output.error, null, "shouldn't throw errors when transpiling");
+    assert.equal(output.stderr, '', 'stderr should be empty');
+    assert.notEqual(output.stdout, '');
+    assert.end();
+  }, './test/fixtures/transpile/*.js');
 });
 
 function spawnDuctTape(cb, args) {

@@ -1,7 +1,7 @@
 'use strict';
 const test = require('tape');
 
-test('bar', assert => {
+test('bar', function(assert) {
   assert.false(false);
   assert.end();
 });

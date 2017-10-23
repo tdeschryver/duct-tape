@@ -1,12 +1,11 @@
 'use strict';
-require('babel-polyfill');
 require('babel-register')({
   presets: [
     [
       'env',
       {
         targets: { node: 'current' },
-        useBuiltIns: true,
+        plugins: ['transform-object-rest-spread'],
       },
     ],
   ],

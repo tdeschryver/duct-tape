@@ -1,5 +1,5 @@
 'use strict';
-const test = require('tape');
+import test from 'tape';
 
 test('object rest and spread', assert => {
   assert.doesNotThrow(() => {
